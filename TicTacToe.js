@@ -135,10 +135,7 @@ class NStepQLearning{
     get_q_value(hashed_state){
         if (hashed_state in this.Q) return this.Q[hashed_state];
         else {
-            let q_values = [];
-            for (let i = 0; i < 9; i++) q_values.push(this.initial_q_value);
-            this.Q[hashed_state] = q_values;
-            return q_values;
+            return this.add_initial_q_values(hashed_state);
         }
     }
 
@@ -164,9 +161,7 @@ class NStepQLearning{
                 return actions[Math.floor(Math.random() * actions.length)];
             }
             else {
-                let q_values = [];
-                for (let i = 0; i < 9; i++) q_values.push(this.initial_q_value);
-                this.Q[hashed_state] = q_values;
+                this.add_initial_q_values(hashed_state)
                 return actions[Math.floor(Math.random() * actions.length)];
             }
         }
@@ -180,7 +175,6 @@ class NStepQLearning{
         let next_state = step[0];
         let reward = step[1];
         let done = step[2]
-        console.log(this.Q[string_state] + " ----- " + action)
         this.player = 1
         this.states.push(state.toString());
         this.actions.push(action);
@@ -196,24 +190,16 @@ class NStepQLearning{
 
     train(reward){
         let i = 0;
-        let next_max = -1.0
+        let next_max = -1.0;
         this.move_history = this.move_history.reverse();
         for (const h of this.move_history){
             if (next_max === -1.0) {
-                if (!(h[0] in this.Q)){
-                    let q_values = [];
-                    for (let i = 0; i < 9; i++) q_values.push(this.initial_q_value);
-                    this.Q[h[0]] = q_values;
-                }
+                this.add_initial_q_values(h[0]);
                 this.Q[h[0]][h[1]] = reward;
             }
             else {
-                if (!(h[0] in this.Q)){
-                    let q_values = [];
-                    for (let i = 0; i < 9; i++) q_values.push(this.initial_q_value);
-                    this.Q[h[0]] = q_values;
-                }
-                this.Q[h[0]][h[1]] += + this.learning_rate * this.discount_factor * next_max
+                this.add_initial_q_values(h[0]);
+                this.Q[h[0]][h[1]] += + this.learning_rate * this.discount_factor * next_max;
             }
 
             i++;
@@ -221,6 +207,15 @@ class NStepQLearning{
         }
     
         this.reset_agent();
+    }
+
+    add_initial_q_values(state){
+        if (!(state in this.Q)){
+            let q_values = [];
+            for (let i = 0; i < 9; i++) q_values.push(this.initial_q_value);
+            this.Q[state] = q_values;
+            return q_values;
+        } 
     }
 
     reset_agent(){
