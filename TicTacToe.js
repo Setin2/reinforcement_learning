@@ -120,9 +120,9 @@ class NStepQLearning{
         this.env = env
         this.player = 0
         this.Q = {}  // [string, np.ndarray]
-        this.states = []
-        this.actions = []
-        this.rewards = []
+        //this.states = []
+        //this.actions = []
+        //this.rewards = []
         this.move_history = []
         this.discount_factor = discount_factor
         this.learning_rate = learning_rate
@@ -176,9 +176,9 @@ class NStepQLearning{
         let reward = step[1];
         let done = step[2]
         this.player = 1
-        this.states.push(state.toString());
-        this.actions.push(action);
-        this.rewards.push(reward)
+        //this.states.push(state.toString());
+        //this.actions.push(action);
+        //this.rewards.push(reward)
         this.move_history.push([string_state, action])
 
         if (done)
