@@ -116,7 +116,7 @@ class TicTacToe{
 }
 
 class NStepQLearning{
-    constructor(env, N, epsilon, play, learning_rate = 0.9, discount_factor = 0.9, initial_q_value = 0){
+    constructor(env, N, epsilon, play, learning_rate = 0.9, discount_factor = 0.9, initial_q_value = 0.1){
         this.env = env
         this.player = 0
         this.Q = {}  // [string, np.ndarray]
@@ -223,6 +223,7 @@ class NStepQLearning{
         this.states = []
         this.actions = []
         this.rewards = []
+        this.move_history = []
     }
 
     expert_policy(state, player){
