@@ -8,3 +8,5 @@ Contains an agent that solves the open-ai "pendulum" and "acrobot" tasks using 3
 
 # TicTacToe.js
 The same agent and environment as in the tabular q-learning implementation. This time, implemented in javascript and comes with an interface so that you can play against the agent while it learns :)
+
+To play against the agent, just follow the link: https://setin2.github.io/reinforcement_learning/
