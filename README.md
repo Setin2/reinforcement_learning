@@ -1,4 +1,4 @@
-Various RL projects. from uni & spare time. The repository is divided into 3 sections.
+Various RL projects from university & spare time. The repository is divided into 3 sections.
 
 # Tabular reinforcement learning. 
 Contains an implementation of an n-step tabular q-learning algorithm in a custom TicTacToe environemnt
